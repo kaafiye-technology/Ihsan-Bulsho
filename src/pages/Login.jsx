@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle login logic here
-    console.log('Login attempt with:', { email, password, rememberMe });
+    console.log("Login attempt with:", { email, password, rememberMe });
     // Redirect to home or dashboard after successful login
     // navigate('/');
   };
@@ -21,14 +21,16 @@ const Login = () => {
         {/* Header */}
         <div className="text-center">
           <h2 className="text-3xl font-bold text-gray-900">Log in</h2>
-          
         </div>
 
         {/* Login Form */}
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-4">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 Email
               </label>
               <input
@@ -43,9 +45,12 @@ const Login = () => {
                 placeholder="Enter your email"
               />
             </div>
-            
+
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 Password
               </label>
               <input
@@ -65,7 +70,10 @@ const Login = () => {
           {/* Forgot password */}
           <div className="flex items-center justify-end">
             <div className="text-sm">
-              <a href="#" className="font-medium text-emerald-600 hover:text-emerald-500">
+              <a
+                href="#"
+                className="font-medium text-emerald-600 hover:text-emerald-500"
+              >
                 Forgot your password?
               </a>
             </div>
@@ -81,7 +89,10 @@ const Login = () => {
               onChange={(e) => setRememberMe(e.target.checked)}
               className="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300 rounded"
             />
-            <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+            <label
+              htmlFor="remember-me"
+              className="ml-2 block text-sm text-gray-900"
+            >
               Remember me
             </label>
           </div>
@@ -99,12 +110,12 @@ const Login = () => {
           {/* Sign up link */}
           <div className="text-center mt-4">
             <p className="text-sm text-gray-600">
-              Don't have an account?{' '}
-              <a 
-                href="#" 
+              Don't have an account?{" "}
+              <a
+                href="#"
                 onClick={(e) => {
                   e.preventDefault();
-                  navigate('/signup');
+                  navigate("/signup");
                 }}
                 className="font-medium text-emerald-600 hover:text-emerald-500"
               >
