@@ -85,7 +85,7 @@ const CampaignCard = ({ campaign }) => {
             className="px-6 py-3 bg-emerald-600 text-white text-base font-semibold rounded-lg hover:bg-emerald-700 transition-colors shadow-sm hover:shadow"
             onClick={(e) => {
               e.stopPropagation(); // Prevent card click when clicking button
-              navigate(`/campaign/${campaign.id}`);
+              navigate(`/donate/${campaign.id}`, { state: { campaign } });
             }}
           >
             Donate
