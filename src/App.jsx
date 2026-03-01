@@ -15,6 +15,7 @@ import DonationPage from "./pages/DonationPage";
 import "./App.css";
 import AddCampaign from "./pages/AddCampaign";
 import Donate from "./pages/Donate";
+import About from "./pages/About";
 
 // Create a wrapper component to conditionally show footer
 function AppContent() {
@@ -36,7 +37,9 @@ function AppContent() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/about" element={<About />} />
           <Route path="/campaign/:id" element={<CampaignDetails />} />
+
           <Route path="/donate/:id" element={<Donate />} />
           <Route path="/add-campaign" element={<AddCampaign />} />
         </Routes>

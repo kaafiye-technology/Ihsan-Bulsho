@@ -1,35 +1,42 @@
 import React from "react";
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  
+
   // Check if current path is login, signup, or donation page
-  const isAuthPage = location.pathname === '/login' || location.pathname === '/signup';
-  const isCampaignPage = location.pathname.includes('/campaign/');
-  const isDonationPage = location.pathname.includes('/donate/');
+  const isAuthPage =
+    location.pathname === "/login" || location.pathname === "/signup";
+  const isCampaignPage = location.pathname.includes("/campaign/");
+  const isDonationPage = location.pathname.includes("/donate/");
 
   return (
     <>
       {/* Simple Header - Only logo and auth buttons */}
-      <div className={`w-full z-20 px-4 sm:px-6 md:px-8 py-3 sm:py-4 ${
-        isAuthPage || isCampaignPage || isDonationPage ? 'bg-white border-b border-gray-200' : 'absolute top-0 left-0'
-      }`}>
+      <div
+        className={`w-full z-20 px-4 sm:px-6 md:px-8 py-3 sm:py-4 ${
+          isAuthPage || isCampaignPage || isDonationPage
+            ? "bg-white border-b border-gray-200"
+            : "absolute top-0 left-0"
+        }`}
+      >
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between h-16 sm:h-20">
             {/* Logo/Brand - Clickable to home */}
-            <h1 
-              onClick={() => navigate('/')} 
+            <h1
+              onClick={() => navigate("/")}
               className={`text-xl sm:text-2xl md:text-3xl font-bold cursor-pointer hover:opacity-80 transition-opacity ${
-                isAuthPage || isCampaignPage || isDonationPage ? 'text-emerald-700' : 'text-white drop-shadow-lg'
+                isAuthPage || isCampaignPage || isDonationPage
+                  ? "text-emerald-700"
+                  : "text-white drop-shadow-lg"
               }`}
             >
-              Ihsan Bulsho
+              IHSAN BULSHO{" "}
             </h1>
 
             {/* Auth Buttons */}
-            <div className="flex gap-2 sm:gap-3">
+            {/* <div className="flex gap-2 sm:gap-3">
               <button 
                 onClick={() => navigate('/signup')}
                 className={`px-3 sm:px-5 py-1.5 sm:py-2.5 rounded-md transition-colors ${
@@ -54,7 +61,7 @@ const Header = () => {
               >
                 Login
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -64,9 +71,12 @@ const Header = () => {
         <header
           className="relative w-full min-h-[520px] flex items-center"
           style={{
-            backgroundImage: "url('/images/ramadan.jpg')",
+            width: "100%",
+            height: "600px", // increase height
+            backgroundImage: "url('/logo.jpeg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
           }}
         >
           {/* Dark overlay */}
@@ -77,7 +87,8 @@ const Header = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
               <div className="max-w-4xl text-center md:text-left text-white">
                 <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4">
-                  Ramadan is around <br className="hidden sm:block" /> the corner!
+                  Ihsan bulsho <br className="hidden sm:block" /> waa caawiyaha
+                  bulshada!
                 </h2>
 
                 <p className="text-lg sm:text-xl md:text-2xl text-gray-200 mb-6 sm:mb-8">
@@ -85,15 +96,15 @@ const Header = () => {
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center md:items-start">
-                  <button 
-                    onClick={() => navigate('/signup')}
+                  <button
+                    onClick={() => navigate("/signup")}
                     className="w-full sm:w-auto px-6 sm:px-8 py-3 bg-yellow-400 text-gray-900 font-bold rounded-md hover:bg-yellow-500 transition-colors"
                   >
                     Join now
                   </button>
 
-                  <button 
-                    onClick={() => navigate('/about')}
+                  <button
+                    onClick={() => navigate("/about")}
                     className="w-full sm:w-auto px-6 sm:px-8 py-3 border-2 border-white text-white font-semibold rounded-md hover:bg-white hover:text-gray-900 transition-colors"
                   >
                     Learn more
