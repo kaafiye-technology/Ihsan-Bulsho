@@ -8,9 +8,9 @@ const About = () => {
       {/* Title */}
       <h1 className="text-4xl font-bold text-center mb-4">IHSAAN BULSHO</h1>
       {/* Subtitle */}
-      <h2 className="text-2xl text-center font-semibold mb-8">
+      {/* <h2 className="text-2xl text-center font-semibold mb-8">
         Warbixin Kooban – Ramadaan Cunto iyo Biyo Qaybin
-      </h2>
+      </h2> */}
       {/* Hordhac */}
       <section className="mb-8">
         <h3 className="text-xl font-semibold mb-2">Hordhac</h3>

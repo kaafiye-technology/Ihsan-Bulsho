@@ -92,7 +92,7 @@ const Header = () => {
                 </h2>
 
                 <p className="text-lg sm:text-xl md:text-2xl text-gray-200 mb-6 sm:mb-8">
-                  Will you be among the foremost to do good?
+                  Ma ka mid noqon doontaa kuwa hormuudka u ah wanaagga?
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center md:items-start">

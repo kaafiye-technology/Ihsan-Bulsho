@@ -62,7 +62,7 @@ export default function CampaignForm() {
       formData.append("logo", "");
 
       const res = await postApiKey(
-        "/create-upload-apikey/register-donation_campaigns",
+        "/create-upload-apikey/register-donation_campaigns-web",
         formData,
         true
       );

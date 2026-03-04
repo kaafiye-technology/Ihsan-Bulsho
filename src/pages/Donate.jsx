@@ -2,7 +2,6 @@ import { useLocation, useParams } from "react-router-dom";
 import { useState } from "react";
 import { API_URL } from "../constants";
 import { postApiKey } from "../services/api";
-import { TbChevronsDownLeft } from "react-icons/tb";
 
 export default function Donate() {
   const { id } = useParams();
@@ -37,7 +36,7 @@ export default function Donate() {
     // console.log("payload:", payload);
     try {
       const res = await postApiKey(
-        "create-apikey/register-donation_payment",
+        "create-apikey/register-donation_payment-web",
         payload
       );
       //   console.log("Donation submitted:", res);

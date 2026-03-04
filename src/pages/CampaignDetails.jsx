@@ -1,14 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { API_URL } from "../constants";
+import { getApiKey } from "../services/api";
 
 const CampaignDetails = () => {
   const location = useLocation();
   const { campaign } = location.state || {}; // get full object
-  console.log("campaign:", campaign);
+  // console.log("campaign:", campaign);
+  const [recentDonors, setRecentDonors] = useState([]);
   if (!campaign) {
     return <p className="p-4 text-gray-500">Campaign data not available.</p>;
   }
+  useEffect(() => {
+    async function fetchDonnors() {
+      try {
+        const data = await getApiKey(
+          "getlink-apikey/donation_payment-report-web"
+        );
+        console.log("data:", data.report);
+        const uniqueDonors = Array.from(
+          new Map(data.report.map((item) => [item.Donorname, item])).values()
+        );
+
+        setRecentDonors(uniqueDonors);
+      } catch (err) {
+        console.log("err:", err);
+      }
+    }
+
+    fetchDonnors();
+  }, []);
+
   const navigate = useNavigate();
   const [showShareModal, setShowShareModal] = useState(false);
   const [copySuccess, setCopySuccess] = useState("");
@@ -24,109 +46,6 @@ const CampaignDetails = () => {
   const progress = (campaign.raised / campaign.goal) * 100;
 
   // Sample donors data with profiles
-  const recentDonors = [
-    {
-      amount: "£4",
-      currency: "GBP",
-      time: "4 days ago",
-      name: "maanka",
-      profile: {
-        type: "user",
-        avatar:
-          "https://ui-avatars.com/api/?name=maanka&background=10B981&color=fff&size=40",
-        initials: "M",
-      },
-    },
-    {
-      amount: "$4",
-      currency: "USD",
-      time: "4 days ago",
-      name: "An Anonymous kind soul",
-      profile: {
-        type: "anonymous",
-        avatar: null,
-        initials: "AK",
-      },
-    },
-    {
-      amount: "$26",
-      currency: "CAD",
-      time: "a month ago",
-      name: "An Anonymous kind soul",
-      profile: {
-        type: "anonymous",
-        avatar: null,
-        initials: "AK",
-      },
-    },
-    {
-      amount: "$50",
-      currency: "USD",
-      time: "a month ago",
-      name: "An Anonymous kind soul",
-      profile: {
-        type: "anonymous",
-        avatar: null,
-        initials: "AK",
-      },
-    },
-    {
-      amount: "$50",
-      currency: "USD",
-      time: "a month ago",
-      name: "An Anonymous kind soul",
-      profile: {
-        type: "anonymous",
-        avatar: null,
-        initials: "AK",
-      },
-    },
-    {
-      amount: "$4",
-      currency: "SGD",
-      time: "a month ago",
-      name: "An Anonymous kind soul",
-      profile: {
-        type: "anonymous",
-        avatar: null,
-        initials: "AK",
-      },
-    },
-    {
-      amount: "$10",
-      currency: "USD",
-      time: "2 months ago",
-      name: "Anonymous",
-      profile: {
-        type: "anonymous",
-        avatar: null,
-        initials: "A",
-      },
-    },
-    {
-      amount: "$20",
-      currency: "USD",
-      time: "2 months ago",
-      name: "Anonymous",
-      profile: {
-        type: "anonymous",
-        avatar: null,
-        initials: "A",
-      },
-    },
-    {
-      amount: "$14",
-      currency: "CAD",
-      time: "2 months ago",
-      name: "Tija Av",
-      profile: {
-        type: "user",
-        avatar:
-          "https://ui-avatars.com/api/?name=Tija+Av&background=6366F1&color=fff&size=40",
-        initials: "TA",
-      },
-    },
-  ];
 
   // Copy to clipboard function without closing modal
   const copyToClipboard = () => {
@@ -322,7 +241,7 @@ const CampaignDetails = () => {
               {/* Goal */}
               <div className="mb-4">
                 <span className="text-gray-600">
-                  raised of ${campaign.goal.toLocaleString()} USD goal
+                  raised of ${campaign.goal.toLocaleString()} goal
                 </span>
               </div>
 
@@ -366,14 +285,14 @@ const CampaignDetails = () => {
               </div>
 
               {/* Zakat Verified */}
-              <div className="mb-4">
+              {/* <div className="mb-4">
                 <span className="inline-block px-3 py-1 bg-emerald-50 text-emerald-700 text-sm font-medium rounded-full">
                   Zakat-verified
                 </span>
-              </div>
+              </div> */}
 
               {/* Impact Info - Moved inside donation card */}
-              <div className="space-y-1 pt-2 border-t border-gray-200">
+              {/* <div className="space-y-1 pt-2 border-t border-gray-200">
                 <div>
                   <span className="text-gray-600">Impact: </span>
                   <span className="text-gray-900 font-medium">
@@ -388,7 +307,7 @@ const CampaignDetails = () => {
                     Verified for authenticity.
                   </span>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -412,15 +331,15 @@ const CampaignDetails = () => {
               <div
                 className="rounded-t-xl -mt-6 -mx-6 mb-4 p-6 pt-8"
                 style={{
-                  backgroundImage: "url('/images/donors.png')",
+                  backgroundImage: "url('/logo.jpeg')",
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                 }}
               >
                 <h2 className="text-2xl font-bold text-black mb-2">Donors</h2>
                 <p className="text-black mb-4">
-                  Your share could raise over{" "}
-                  <span className="font-semibold">$77</span>
+                  {/* Your share could raise over{" "} */}
+                  {/* <span className="font-semibold">$77</span> */}
                 </p>
               </div>
 
@@ -438,14 +357,15 @@ const CampaignDetails = () => {
                   >
                     {/* Profile Avatar based on donor profile data */}
                     <div className="flex-shrink-0">
-                      {donor.profile.type === "user" && donor.profile.avatar ? (
+                      {donor?.profile?.type === "user" &&
+                      donor?.profile?.avatar ? (
                         <img
                           src={donor.profile.avatar}
-                          alt={donor.name}
+                          alt={donor.Donorname}
                           className="w-8 h-8 rounded-full object-cover"
                         />
-                      ) : donor.profile.type === "anonymous" &&
-                        donor.name === "Anonymous" ? (
+                      ) : donor?.profile?.type === "anonymous" &&
+                        donor.Donorname === "Anonymous" ? (
                         <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center">
                           <svg
                             className="w-4 h-4 text-gray-500"
@@ -462,7 +382,7 @@ const CampaignDetails = () => {
                       ) : (
                         <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center">
                           <span className="text-xs font-bold text-emerald-700">
-                            {donor.profile.initials}
+                            {donor?.profile?.initials}
                           </span>
                         </div>
                       )}
@@ -470,14 +390,16 @@ const CampaignDetails = () => {
 
                     {/* Donor Info */}
                     <div className="flex-1">
-                      <p className="text-gray-600 font-medium">{donor.name}</p>
+                      <p className="text-gray-600 font-medium">
+                        {donor.Donorname}
+                      </p>
                       <div className="flex items-center gap-2 mt-0.5">
                         <span className="font-semibold text-gray-900">
-                          {donor.amount} {donor.currency}
+                          {donor.Evcamount} USD
                         </span>
                         <span className="text-gray-400">•</span>
                         <span className="text-gray-500 text-xs">
-                          {donor.time}
+                          {donor?.time}
                         </span>
                       </div>
                     </div>
