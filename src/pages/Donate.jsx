@@ -31,15 +31,16 @@ export default function Donate() {
       donor_email: "",
       evc_payment_tell: form.tell,
       evc_amount: amount,
-      evc_description: form.message,
+      evc_description: form.message || form.name,
+       branch_id: 375
     };
-    // console.log("payload:", payload);
+     console.log("payload:", payload);
     try {
       const res = await postApiKey(
         "create-apikey/register-donation_payment-web",
         payload
       );
-      //   console.log("Donation submitted:", res);
+         console.log("Donation submitted:", res);
       alert(res.message);
     } catch (err) {
       console.error(err);
